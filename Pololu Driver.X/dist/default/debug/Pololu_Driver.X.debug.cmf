@@ -1,0 +1,549 @@
+%CMF
+# %PSECTS Section
+# For each object file, details of its psects are enumerated here.
+# The begining of the section is indicated by %PSECTS.  The first
+# line indicates the name of the first object file, e.g.
+#    $foo.obj
+# Each line that follows describes a psect in that object file, until
+# the next object file.  The lines that describe a psect have the
+# format:
+#    <psect name> <class name> <space> <link address> <load addresses> <length> <delta>
+# All addresses and the length are given in unqualified hexadecimal
+# in delta units.  Any other numeric values are decimal.
+%PSECTS
+$dist/default/debug\Pololu_Driver.X.debug.obj
+cinit CODE 0 7FE 7FE 2 2
+text1 CODE 0 71F 71F 33 2
+text2 CODE 0 6A2 6A2 F 2
+text3 CODE 0 6EC 6EC 33 2
+text4 CODE 0 7A4 7A4 5A 2
+text5 CODE 0 6D1 6D1 1B 2
+text6 CODE 0 6C1 6C1 10 2
+text7 CODE 0 694 694 E 2
+text8 CODE 0 6B1 6B1 10 2
+maintext CODE 0 752 752 52 2
+cstackCOMMON COMMON 1 70 70 E 1
+cstackBANK0 BANK0 1 20 20 10 1
+stringtext1 STRCODE 0 68E 68E 6 2
+stringtext2 STRCODE 0 688 688 6 2
+stringtext3 STRCODE 0 687 687 1 2
+$C:\Users\Liam\AppData\Local\Temp\s7v4.obj
+reset_vec CODE 0 0 0 2 2
+end_init CODE 0 2 2 1 2
+config CONFIG 0 8007 8007 2 2
+# %UNUSED Section
+# This section enumerates the unused ranges of each CLASS. Each entry
+# is described on a single line as follows:
+#    <class name> <range> <delta>
+# Addresses given in the range are in hexadecimal and units of delta.
+%UNUSED
+RAM 30-6F 1
+RAM A0-BF 1
+BANK0 30-6F 1
+BANK1 A0-BF 1
+CONST 3-686 2
+ENTRY 3-686 2
+IDLOC 8000-8003 2
+SFR10 500-56F 1
+SFR11 580-5EF 1
+SFR12 600-66F 1
+SFR13 680-6EF 1
+SFR14 700-76F 1
+SFR15 780-7EF 1
+SFR16 800-86F 1
+SFR17 880-8EF 1
+SFR18 900-96F 1
+SFR19 980-9EF 1
+SFR20 A00-A6F 1
+SFR21 A80-AEF 1
+SFR22 B00-B6F 1
+SFR23 B80-BEF 1
+SFR24 C00-C6F 1
+SFR25 C80-CEF 1
+SFR26 D00-D6F 1
+SFR27 D80-DEF 1
+SFR28 E00-E6F 1
+SFR29 E80-EEF 1
+SFR30 F00-F6F 1
+SFR31 F80-FEF 1
+STACK 2010-206F 1
+CODE 3-686 2
+SFR0 0-1F 1
+SFR1 80-9F 1
+SFR2 100-16F 1
+SFR3 180-1EF 1
+SFR4 200-26F 1
+SFR5 280-2EF 1
+SFR6 300-36F 1
+SFR7 380-3EF 1
+SFR8 400-46F 1
+SFR9 480-4EF 1
+BIGRAM 2000-206F 1
+STRCODE 3-686 2
+STRING 3-686 2
+# %LINETAB Section
+# This section enumerates the file/line to address mappings.
+# The beginning of the section is indicated by %LINETAB.
+# The first line indicates the name of the first object file, e.g.
+#   $foo.obj
+# Each line that follows describes a single mapping until the next
+# object file.  Mappings have the following format:
+#    <address> <psect name> <class name> ><line number>:<file name>
+# The address is absolute and given given in unqualified hex 
+# in delta units of the psect. All mappings within an object file
+# are in ascending order of addresses.
+# All other numeric values are in decimal.
+%LINETAB
+$dist/default/debug\Pololu_Driver.X.debug.obj
+7FE cinit CODE >1005:C:\Users\Liam\AppData\Local\Temp\s7v4.
+7FE cinit CODE >1008:C:\Users\Liam\AppData\Local\Temp\s7v4.
+7FE cinit CODE >1014:C:\Users\Liam\AppData\Local\Temp\s7v4.
+7FE cinit CODE >1016:C:\Users\Liam\AppData\Local\Temp\s7v4.
+7FF cinit CODE >1017:C:\Users\Liam\AppData\Local\Temp\s7v4.
+6B1 text8 CODE >18:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6B1 text8 CODE >19:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6B3 text8 CODE >20:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6B4 text8 CODE >21:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6B5 text8 CODE >22:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6B6 text8 CODE >23:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6B7 text8 CODE >24:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6B8 text8 CODE >25:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6BA text8 CODE >26:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6BD text8 CODE >27:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6BF text8 CODE >28:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6C0 text8 CODE >29:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+694 text7 CODE >30:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+694 text7 CODE >31:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+696 text7 CODE >32:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+697 text7 CODE >33:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+699 text7 CODE >34:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+69A text7 CODE >35:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+69B text7 CODE >36:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+69D text7 CODE >37:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+69F text7 CODE >38:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6A1 text7 CODE >39:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6C1 text6 CODE >41:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6C2 text6 CODE >42:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6C5 text6 CODE >43:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6C8 text6 CODE >44:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6CD text6 CODE >45:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6CF text6 CODE >46:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6D1 text5 CODE >49:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6D2 text5 CODE >50:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6D4 text5 CODE >52:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6D9 text5 CODE >53:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6E4 text5 CODE >52:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6E9 text5 CODE >56:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6EB text5 CODE >58:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+7A4 text4 CODE >128:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+7A4 text4 CODE >141:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+7A6 text4 CODE >142:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+7AE text4 CODE >143:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+7B0 text4 CODE >144:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+7B7 text4 CODE >146:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+7BB text4 CODE >147:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+7BF text4 CODE >150:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+7C5 text4 CODE >153:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+7C9 text4 CODE >154:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+7CB text4 CODE >155:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+7D1 text4 CODE >157:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+7D5 text4 CODE >158:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+7D7 text4 CODE >159:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+7DD text4 CODE >161:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+7E7 text4 CODE >162:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+7E9 text4 CODE >163:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+7EF text4 CODE >165:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+7F3 text4 CODE >166:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+7F7 text4 CODE >167:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+7FD text4 CODE >169:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+6EC text3 CODE >26:C:\Users\Liam\Desktop\Pololu Driver.X\pololu_cmd.c
+6ED text3 CODE >27:C:\Users\Liam\Desktop\Pololu Driver.X\pololu_cmd.c
+6F4 text3 CODE >28:C:\Users\Liam\Desktop\Pololu Driver.X\pololu_cmd.c
+6FC text3 CODE >29:C:\Users\Liam\Desktop\Pololu Driver.X\pololu_cmd.c
+702 text3 CODE >30:C:\Users\Liam\Desktop\Pololu Driver.X\pololu_cmd.c
+709 text3 CODE >31:C:\Users\Liam\Desktop\Pololu Driver.X\pololu_cmd.c
+716 text3 CODE >32:C:\Users\Liam\Desktop\Pololu Driver.X\pololu_cmd.c
+6A2 text2 CODE >68:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6A2 text2 CODE >70:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6A6 text2 CODE >71:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6AA text2 CODE >72:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+6B0 text2 CODE >73:C:\Users\Liam\Desktop\Pololu Driver.X\spi.c
+71F text1 CODE >173:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+721 text1 CODE >175:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+725 text1 CODE >176:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+729 text1 CODE >177:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+72F text1 CODE >180:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+731 text1 CODE >181:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+734 text1 CODE >182:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+736 text1 CODE >183:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+739 text1 CODE >184:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+73B text1 CODE >185:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+741 text1 CODE >186:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+743 text1 CODE >187:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+744 text1 CODE >188:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+749 text1 CODE >191:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+752 maintext CODE >38:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+752 maintext CODE >41:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+755 maintext CODE >42:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+756 maintext CODE >45:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+757 maintext CODE >48:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+762 maintext CODE >51:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+76A maintext CODE >53:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+76C maintext CODE >54:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+76D maintext CODE >71:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+773 maintext CODE >72:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+77E maintext CODE >73:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+78B maintext CODE >74:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+796 maintext CODE >75:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+7A3 maintext CODE >69:C:\Users\Liam\Desktop\Pololu Driver.X\main.c
+# %SYMTAB Section
+# An enumeration of all symbols in the program.
+# The beginning of the section is indicated by %SYMTAB.
+# Each line describes a single symbol as follows:
+#    <label> <value> [-]<load-adj> <class> <space> <psect> <file-name>
+# The value and load-adj are both in unqualified hexadecimal.
+# All other numeric values are in decimal.  The load-adj is the
+# quantity one needs to add to the symbol value in order to obtain the load
+# address of the symbol.  This value may be signed. If the symbol
+# was defined in a psect then <psect> will be "-". File-name
+# is the name of the object file in which the symbol was defined.
+%SYMTAB
+___latbits 0 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+__Hspace_0 8009 0 ABS 0 - -
+__Hspace_1 7E 0 ABS 0 - -
+__Hspace_2 0 0 ABS 0 - -
+__Hspace_3 0 0 ABS 0 - -
+_SSP1STATbits 214 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+__size_of_transmitData 0 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+__Heeprom_data 0 0 EEDATA 3 eeprom_data -
+__CFG_MCLRE$ON 0 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+transmitData@data 22 0 BANK0 1 cstackBANK0 dist/default/debug\Pololu_Driver.X.debug.obj
+transmitData@sreg 25 0 BANK0 1 cstackBANK0 dist/default/debug\Pololu_Driver.X.debug.obj
+resetIRQ@write 7A 0 COMMON 1 cstackCOMMON dist/default/debug\Pololu_Driver.X.debug.obj
+__Hstrings 0 0 ABS 0 strings -
+___sp 0 0 STACK 2 stack C:\Users\Liam\AppData\Local\Temp\s7v4.obj
+_main EA4 0 CODE 0 maintext dist/default/debug\Pololu_Driver.X.debug.obj
+btemp 7E 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+start 4 0 CODE 0 init C:\Users\Liam\AppData\Local\Temp\s7v4.obj
+__CFG_BOREN$OFF 0 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+__size_of_main 0 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+_OPTION_REGbits 95 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+__end_of_transmitData EA4 0 CODE 0 text1 dist/default/debug\Pololu_Driver.X.debug.obj
+__Hpowerup 0 0 CODE 0 powerup -
+_SPI_writeArray DA2 0 CODE 0 text5 dist/default/debug\Pololu_Driver.X.debug.obj
+?_transmitData 7C 0 COMMON 1 cstackCOMMON dist/default/debug\Pololu_Driver.X.debug.obj
+intlevel0 0 0 ENTRY 0 functab C:\Users\Liam\AppData\Local\Temp\s7v4.obj
+intlevel1 0 0 ENTRY 0 functab C:\Users\Liam\AppData\Local\Temp\s7v4.obj
+intlevel2 0 0 ENTRY 0 functab C:\Users\Liam\AppData\Local\Temp\s7v4.obj
+intlevel3 0 0 ENTRY 0 functab C:\Users\Liam\AppData\Local\Temp\s7v4.obj
+intlevel4 0 0 ENTRY 0 functab C:\Users\Liam\AppData\Local\Temp\s7v4.obj
+intlevel5 0 0 ENTRY 0 functab C:\Users\Liam\AppData\Local\Temp\s7v4.obj
+_SPI_write_byte D82 0 CODE 0 text6 dist/default/debug\Pololu_Driver.X.debug.obj
+_OSCCONbits 99 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+wtemp0 7E 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+__Hfunctab 0 0 ENTRY 0 functab -
+__Hclrtext 0 0 ABS 0 clrtext -
+__end_of_craftPacket E3E 0 CODE 0 text3 dist/default/debug\Pololu_Driver.X.debug.obj
+_ANSELA 18C 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+_ANSELC 18E 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+_APFCON 11D 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+__size_of_configureTX 0 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+__Lmaintext 0 0 ABS 0 maintext -
+__end_of_SPI_writeArray DD8 0 CODE 0 text5 dist/default/debug\Pololu_Driver.X.debug.obj
+__end_of_SPI_write_byte DA2 0 CODE 0 text6 dist/default/debug\Pololu_Driver.X.debug.obj
+__end_of_RX_PW_P D28 0 STRCODE 0 stringtext1 dist/default/debug\Pololu_Driver.X.debug.obj
+craftPacket@packet 71 0 COMMON 1 cstackCOMMON dist/default/debug\Pololu_Driver.X.debug.obj
+_WPUAbits 20C 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+start_initialization FFC 0 CODE 0 cinit dist/default/debug\Pololu_Driver.X.debug.obj
+_TRISAbits 8C 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+_TRISCbits 8E 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+__end_of_RX_ADDR_P D1C 0 STRCODE 0 stringtext2 dist/default/debug\Pololu_Driver.X.debug.obj
+__pcstackBANK0 20 0 BANK0 1 cstackBANK0 dist/default/debug\Pololu_Driver.X.debug.obj
+SPI_writeArray@data 78 0 COMMON 1 cstackCOMMON dist/default/debug\Pololu_Driver.X.debug.obj
+__size_of_SPI_init 0 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+transmitData@write 23 0 BANK0 1 cstackBANK0 dist/default/debug\Pololu_Driver.X.debug.obj
+___int_sp 0 0 STACK 2 stack C:\Users\Liam\AppData\Local\Temp\s7v4.obj
+__Hbank0 0 0 ABS 0 bank0 -
+__Hbank1 0 0 ABS 0 bank1 -
+__Hbank2 0 0 BANK2 1 bank2 -
+__Hbank3 0 0 BANK3 1 bank3 -
+__Hbank4 0 0 BANK4 1 bank4 -
+__Hbank5 0 0 BANK5 1 bank5 -
+__Hbank6 0 0 BANK6 1 bank6 -
+__Hbank7 0 0 BANK7 1 bank7 -
+__Hbank8 0 0 BANK8 1 bank8 -
+__Hbank9 0 0 BANK9 1 bank9 -
+__Hcinit 1000 0 CODE 0 cinit -
+__Hidloc 0 0 IDLOC 0 idloc -
+__Hsfr10 0 0 ABS 0 sfr10 -
+__Hsfr11 0 0 ABS 0 sfr11 -
+__Hsfr12 0 0 ABS 0 sfr12 -
+__Hsfr13 0 0 ABS 0 sfr13 -
+__Hsfr14 0 0 ABS 0 sfr14 -
+__Hsfr15 0 0 ABS 0 sfr15 -
+__Hsfr16 0 0 ABS 0 sfr16 -
+__Hsfr17 0 0 ABS 0 sfr17 -
+__Hsfr18 0 0 ABS 0 sfr18 -
+__Hsfr19 0 0 ABS 0 sfr19 -
+__Hsfr20 0 0 ABS 0 sfr20 -
+__Hsfr21 0 0 ABS 0 sfr21 -
+__Hsfr22 0 0 ABS 0 sfr22 -
+__Hsfr23 0 0 ABS 0 sfr23 -
+__Hsfr24 0 0 ABS 0 sfr24 -
+__Hsfr25 0 0 ABS 0 sfr25 -
+__Hsfr26 0 0 ABS 0 sfr26 -
+__Hsfr27 0 0 ABS 0 sfr27 -
+__Hsfr28 0 0 ABS 0 sfr28 -
+__Hsfr29 0 0 ABS 0 sfr29 -
+__Hsfr30 0 0 ABS 0 sfr30 -
+__Hsfr31 0 0 ABS 0 sfr31 -
+__Hstack 0 0 STACK 2 stack -
+__Hbank10 0 0 BANK10 1 bank10 -
+__Hbank11 0 0 BANK11 1 bank11 -
+__Hbank12 0 0 BANK12 1 bank12 -
+__Hbank13 0 0 BANK13 1 bank13 -
+__Hbank14 0 0 BANK14 1 bank14 -
+__Hbank15 0 0 BANK15 1 bank15 -
+__Hbank16 0 0 BANK16 1 bank16 -
+__Hbank17 0 0 BANK17 1 bank17 -
+__Hbank18 0 0 BANK18 1 bank18 -
+__Hbank19 0 0 BANK19 1 bank19 -
+__Hbank20 0 0 BANK20 1 bank20 -
+__Hbank21 0 0 BANK21 1 bank21 -
+__Hbank22 0 0 BANK22 1 bank22 -
+__Hbank23 0 0 BANK23 1 bank23 -
+__Hbank24 0 0 BANK24 1 bank24 -
+__Hbank25 0 0 BANK25 1 bank25 -
+__Hbank26 0 0 BANK26 1 bank26 -
+__Hbank27 0 0 BANK27 1 bank27 -
+__Hbank28 0 0 BANK28 1 bank28 -
+__Hbank29 0 0 BANK29 1 bank29 -
+__Hbank30 0 0 BANK30 1 bank30 -
+__Hbank31 0 0 BANK31 1 bank31 -
+__Hbigram 0 0 ABS 0 bigram -
+__Hmaintext 0 0 ABS 0 maintext -
+__CFG_FOSC$INTOSC 0 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+__Hcommon 0 0 ABS 0 common -
+__Hconfig 10012 0 CONFIG 0 config -
+__Lbank0 0 0 ABS 0 bank0 -
+__Lbank1 0 0 ABS 0 bank1 -
+__Lbank2 0 0 BANK2 1 bank2 -
+__Lbank3 0 0 BANK3 1 bank3 -
+__Lbank4 0 0 BANK4 1 bank4 -
+__Lbank5 0 0 BANK5 1 bank5 -
+__Lbank6 0 0 BANK6 1 bank6 -
+__Lbank7 0 0 BANK7 1 bank7 -
+__Lbank8 0 0 BANK8 1 bank8 -
+__Lbank9 0 0 BANK9 1 bank9 -
+__Lcinit FFC 0 CODE 0 cinit -
+__Lidloc 0 0 IDLOC 0 idloc -
+__Lsfr10 0 0 ABS 0 sfr10 -
+__Lsfr11 0 0 ABS 0 sfr11 -
+__Lsfr12 0 0 ABS 0 sfr12 -
+__Lsfr13 0 0 ABS 0 sfr13 -
+__Lsfr14 0 0 ABS 0 sfr14 -
+__Lsfr15 0 0 ABS 0 sfr15 -
+__Lsfr16 0 0 ABS 0 sfr16 -
+__Lsfr17 0 0 ABS 0 sfr17 -
+__Lsfr18 0 0 ABS 0 sfr18 -
+__Lsfr19 0 0 ABS 0 sfr19 -
+__Lsfr20 0 0 ABS 0 sfr20 -
+__Lsfr21 0 0 ABS 0 sfr21 -
+__Lsfr22 0 0 ABS 0 sfr22 -
+__Lsfr23 0 0 ABS 0 sfr23 -
+__Lsfr24 0 0 ABS 0 sfr24 -
+__Lsfr25 0 0 ABS 0 sfr25 -
+__Lsfr26 0 0 ABS 0 sfr26 -
+__Lsfr27 0 0 ABS 0 sfr27 -
+__Lsfr28 0 0 ABS 0 sfr28 -
+__Lsfr29 0 0 ABS 0 sfr29 -
+__Lsfr30 0 0 ABS 0 sfr30 -
+__Lsfr31 0 0 ABS 0 sfr31 -
+__Lstack 0 0 STACK 2 stack -
+_PORTAbits C 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+__size_of_craftPacket 0 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+__Habs1 0 0 ABS 0 abs1 -
+__Hcode 0 0 ABS 0 code -
+__Hinit 4 0 CODE 0 init -
+__Hsfr0 0 0 ABS 0 sfr0 -
+__Hsfr1 0 0 ABS 0 sfr1 -
+__Hsfr2 0 0 ABS 0 sfr2 -
+__Hsfr3 0 0 ABS 0 sfr3 -
+__Hsfr4 0 0 ABS 0 sfr4 -
+__Hsfr5 0 0 ABS 0 sfr5 -
+__Hsfr6 0 0 ABS 0 sfr6 -
+__Hsfr7 0 0 ABS 0 sfr7 -
+__Hsfr8 0 0 ABS 0 sfr8 -
+__Hsfr9 0 0 ABS 0 sfr9 -
+__Htext 0 0 ABS 0 text -
+__Labs1 0 0 ABS 0 abs1 -
+__Lcode 0 0 ABS 0 code -
+__Linit 4 0 CODE 0 init -
+__Lsfr0 0 0 ABS 0 sfr0 -
+__Lsfr1 0 0 ABS 0 sfr1 -
+__Lsfr2 0 0 ABS 0 sfr2 -
+__Lsfr3 0 0 ABS 0 sfr3 -
+__Lsfr4 0 0 ABS 0 sfr4 -
+__Lsfr5 0 0 ABS 0 sfr5 -
+__Lsfr6 0 0 ABS 0 sfr6 -
+__Lsfr7 0 0 ABS 0 sfr7 -
+__Lsfr8 0 0 ABS 0 sfr8 -
+__Lsfr9 0 0 ABS 0 sfr9 -
+__Ltext 0 0 ABS 0 text -
+__pstringtext1 D1C 0 STRCODE 0 stringtext1 dist/default/debug\Pololu_Driver.X.debug.obj
+__pstringtext2 D10 0 STRCODE 0 stringtext2 dist/default/debug\Pololu_Driver.X.debug.obj
+__pstringtext3 D0E 0 STRCODE 0 stringtext3 dist/default/debug\Pololu_Driver.X.debug.obj
+__LcstackBANK0 0 0 ABS 0 cstackBANK0 -
+__HcstackCOMMON 0 0 ABS 0 cstackCOMMON -
+SPI_writeArray@i 77 0 COMMON 1 cstackCOMMON dist/default/debug\Pololu_Driver.X.debug.obj
+__S0 8009 0 ABS 0 - -
+__S1 7E 0 ABS 0 - -
+__S2 0 0 ABS 0 - -
+SPI_writeArray@ret 76 0 COMMON 1 cstackCOMMON dist/default/debug\Pololu_Driver.X.debug.obj
+_SPI_init D28 0 CODE 0 text7 dist/default/debug\Pololu_Driver.X.debug.obj
+SPI_write_byte@ret_data 72 0 COMMON 1 cstackCOMMON dist/default/debug\Pololu_Driver.X.debug.obj
+__end_of_SPI_init D44 0 CODE 0 text7 dist/default/debug\Pololu_Driver.X.debug.obj
+__Lintentry 4 0 CODE 0 intentry -
+reset_vec 0 0 CODE 0 reset_vec C:\Users\Liam\AppData\Local\Temp\s7v4.obj
+SPI_write_byte@data 71 0 COMMON 1 cstackCOMMON dist/default/debug\Pololu_Driver.X.debug.obj
+_configureTX F48 0 CODE 0 text4 dist/default/debug\Pololu_Driver.X.debug.obj
+__Lstringtext1 0 0 ABS 0 stringtext1 -
+__Lstringtext2 0 0 ABS 0 stringtext2 -
+__Lstringtext3 0 0 ABS 0 stringtext3 -
+__Lbank10 0 0 BANK10 1 bank10 -
+__Lbank11 0 0 BANK11 1 bank11 -
+__Lbank12 0 0 BANK12 1 bank12 -
+__Lbank13 0 0 BANK13 1 bank13 -
+__Lbank14 0 0 BANK14 1 bank14 -
+__Lbank15 0 0 BANK15 1 bank15 -
+__Lbank16 0 0 BANK16 1 bank16 -
+__Lbank17 0 0 BANK17 1 bank17 -
+__Lbank18 0 0 BANK18 1 bank18 -
+__Lbank19 0 0 BANK19 1 bank19 -
+__Lbank20 0 0 BANK20 1 bank20 -
+__Lbank21 0 0 BANK21 1 bank21 -
+__Lbank22 0 0 BANK22 1 bank22 -
+__Lbank23 0 0 BANK23 1 bank23 -
+__Lbank24 0 0 BANK24 1 bank24 -
+__Lbank25 0 0 BANK25 1 bank25 -
+__Lbank26 0 0 BANK26 1 bank26 -
+__Lbank27 0 0 BANK27 1 bank27 -
+__Lbank28 0 0 BANK28 1 bank28 -
+__Lbank29 0 0 BANK29 1 bank29 -
+__Lbank30 0 0 BANK30 1 bank30 -
+__Lbank31 0 0 BANK31 1 bank31 -
+__pmaintext EA4 0 CODE 0 maintext dist/default/debug\Pololu_Driver.X.debug.obj
+__Lbigram 0 0 ABS 0 bigram -
+__CFG_BORV$LO 0 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+__Lcommon 0 0 ABS 0 common -
+__Lconfig 1000E 0 CONFIG 0 config -
+__CFG_CP$OFF 0 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+__CFG_WDTE$OFF 0 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+_LATAbits 10C 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+_LATCbits 10E 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+_RX_PW_P D1C 0 STRCODE 0 stringtext1 dist/default/debug\Pololu_Driver.X.debug.obj
+__size_of_SPI_writeArray 0 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+stackhi 206F 0 ABS 0 - C:\Users\Liam\AppData\Local\Temp\s7v4.obj
+stacklo 2010 0 ABS 0 - C:\Users\Liam\AppData\Local\Temp\s7v4.obj
+__size_of_SPI_write_byte 0 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+__Lspace_0 0 0 ABS 0 - -
+__Lspace_1 0 0 ABS 0 - -
+__Lspace_2 0 0 ABS 0 - -
+__Lspace_3 0 0 ABS 0 - -
+__size_of_resetIRQ 0 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+__HcstackBANK0 0 0 ABS 0 cstackBANK0 -
+_PIR1bits 11 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+__Lend_init 4 0 CODE 0 end_init -
+__CFG_LVP$ON 0 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+__LcstackCOMMON 0 0 ABS 0 cstackCOMMON -
+end_of_initialization FFC 0 CODE 0 cinit dist/default/debug\Pololu_Driver.X.debug.obj
+__Hintentry 4 0 CODE 0 intentry -
+__CFG_STVREN$ON 0 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+SPI_writeArray@length 73 0 COMMON 1 cstackCOMMON dist/default/debug\Pololu_Driver.X.debug.obj
+__Lstrings 0 0 ABS 0 strings -
+__Hreset_vec 4 0 CODE 0 reset_vec -
+craftPacket@x 73 0 COMMON 1 cstackCOMMON dist/default/debug\Pololu_Driver.X.debug.obj
+craftPacket@y 70 0 COMMON 1 cstackCOMMON dist/default/debug\Pololu_Driver.X.debug.obj
+__ptext1 E3E 0 CODE 0 text1 dist/default/debug\Pololu_Driver.X.debug.obj
+__ptext2 D44 0 CODE 0 text2 dist/default/debug\Pololu_Driver.X.debug.obj
+__ptext3 DD8 0 CODE 0 text3 dist/default/debug\Pololu_Driver.X.debug.obj
+__ptext4 F48 0 CODE 0 text4 dist/default/debug\Pololu_Driver.X.debug.obj
+__ptext5 DA2 0 CODE 0 text5 dist/default/debug\Pololu_Driver.X.debug.obj
+__ptext6 D82 0 CODE 0 text6 dist/default/debug\Pololu_Driver.X.debug.obj
+__ptext7 D28 0 CODE 0 text7 dist/default/debug\Pololu_Driver.X.debug.obj
+__ptext8 D62 0 CODE 0 text8 dist/default/debug\Pololu_Driver.X.debug.obj
+_craftPacket DD8 0 CODE 0 text3 dist/default/debug\Pololu_Driver.X.debug.obj
+__Lpowerup 0 0 CODE 0 powerup -
+__Leeprom_data 0 0 EEDATA 3 eeprom_data -
+__Lreset_vec 0 0 CODE 0 reset_vec -
+__Hstringtext1 0 0 ABS 0 stringtext1 -
+__Hstringtext2 0 0 ABS 0 stringtext2 -
+__Hstringtext3 0 0 ABS 0 stringtext3 -
+__CFG_LPBOR$OFF 0 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+__size_of_configIO 0 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+_resetIRQ D44 0 CODE 0 text2 dist/default/debug\Pololu_Driver.X.debug.obj
+__CFG_CLKOUTEN$OFF 0 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+__end_of__initialization FFC 0 CODE 0 cinit dist/default/debug\Pololu_Driver.X.debug.obj
+__Lfunctab 0 0 ENTRY 0 functab -
+__end_of_resetIRQ D62 0 CODE 0 text2 dist/default/debug\Pololu_Driver.X.debug.obj
+__Lclrtext 0 0 ABS 0 clrtext -
+_SSP1CON1bits 215 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+configureTX@write 7A 0 COMMON 1 cstackCOMMON dist/default/debug\Pololu_Driver.X.debug.obj
+__end_of_TX_ADDR D10 0 STRCODE 0 stringtext3 dist/default/debug\Pololu_Driver.X.debug.obj
+__pcstackCOMMON 70 0 COMMON 1 cstackCOMMON dist/default/debug\Pololu_Driver.X.debug.obj
+_SSP1BUF 211 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+main@packetMove 28 0 BANK0 1 cstackBANK0 dist/default/debug\Pololu_Driver.X.debug.obj
+main@packetStop 2C 0 BANK0 1 cstackBANK0 dist/default/debug\Pololu_Driver.X.debug.obj
+__Hend_init 6 0 CODE 0 end_init -
+__end_of_main F48 0 CODE 0 maintext dist/default/debug\Pololu_Driver.X.debug.obj
+__Hram 0 0 ABS 0 ram -
+__Lram 0 0 ABS 0 ram -
+_transmitData E3E 0 CODE 0 text1 dist/default/debug\Pololu_Driver.X.debug.obj
+_configIO D62 0 CODE 0 text8 dist/default/debug\Pololu_Driver.X.debug.obj
+__initialization FFC 0 CODE 0 cinit dist/default/debug\Pololu_Driver.X.debug.obj
+__CFG_PWRTE$OFF 0 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+__CFG_WRT$OFF 0 0 ABS 0 - dist/default/debug\Pololu_Driver.X.debug.obj
+__end_of_configureTX FFC 0 CODE 0 text4 dist/default/debug\Pololu_Driver.X.debug.obj
+__end_of_configIO D82 0 CODE 0 text8 dist/default/debug\Pololu_Driver.X.debug.obj
+# %SPLITSTAB Section
+# This section enumerates all the psect splits performed by the assembler.
+# The beginning of the section is indicated by %SPLITSTAB.
+# Each line is a record a particular split, where the parent psect is on
+# the left and the child on the right.  Note that a child psect is always
+# split form the top of the parent psect. All splits from a given parent
+# are listed in the order in which they occurred.
+%SPLITSTAB
+# %DABS Section
+# This section contains a table of all usuage of the assember
+# directive DABS in the program. Each line has the following format:
+#   <name> <space> <address> <size>
+# If the DABS was originally labelled then that shall be <name>,
+# otherwise name will be "-".  The <space> number is in decimal.
+# <address> and <size> are in byte units as unqaulified hexadecimal
+%DABS
+- 1 7E 2
+# %SEGMENTS Section
+# This sections enumerates the segments of the program.  Each segment
+# is described on a single line as follows:
+#    <name> <space> <link address> <file address> <size> <delta>
+# Addresses and size are in unqualified hexadecimal.  The link address
+# and size are in units of delta. The file address is in units of bytes.
+# All other numeric quantities are in decimal.
+%SEGMENTS
+cinit 0 7FE FFC 2 2
+text1 0 71F E3E 33 2
+text2 0 6A2 D44 F 2
+text3 0 6EC DD8 33 2
+text4 0 7A4 F48 5A 2
+text5 0 6D1 DA2 1B 2
+text6 0 6C1 D82 10 2
+text7 0 694 D28 E 2
+text8 0 6B1 D62 10 2
+maintext 0 752 EA4 52 2
+cstackCOMMON 1 70 70 E 1
+cstackBANK0 1 20 20 10 1
+stringtext1 0 68E D1C 6 2
+stringtext2 0 688 D10 6 2
+stringtext3 0 687 D0E 1 2
+reset_vec 0 0 0 3 2
+config 0 8007 1000E 2 2
