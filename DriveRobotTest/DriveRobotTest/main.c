@@ -2,11 +2,12 @@
  * DriveRobotTest.c
  *
  * Created: 11/2/2017 2:15:35 PM
- * Author : Liam
+ * Author : Liam and Jash
  */ 
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#define F_CPU 8000000UL
 #include <util/delay.h>
 
 // function prototypes
@@ -21,28 +22,34 @@ void brake(void);
 void configPWM(void);
 
 void uartInit(void);
+void ultrasoundEmitterInit(void);
 
 #define SPEED 0x30
 
 #define UART_BAUD_RATE      9600
-#define F_CPU 8000000UL
 #define DIVISOR 8
 #define BRR (((F_CPU/DIVISOR) / UART_BAUD_RATE) - 1)
 #define PACKET_LENGTH 4
 
 const uint8_t packet_start = 0x62;
 const uint8_t packet_end = 0xe1;
+
+static volatile uint8_t pulseEmit;
 static volatile uint8_t rx_data[PACKET_LENGTH];
 static volatile uint8_t x;
 static volatile uint8_t y;
 static volatile uint8_t length = 0;
 
 
-ISR(BADISR_vect) {
+ISR(BADISR_vect)
+{
+	// You sure you don't want to use this to debug??
+	// - Josh
 	return;
 }
 
-ISR (USART_RX_vect) {
+ISR(USART_RX_vect)
+{
 	uint8_t read = UDR0;
 
 	switch(length) {
@@ -73,24 +80,76 @@ ISR (USART_RX_vect) {
 	
 }
 
+ISR(TIMER1_COMPA_vect)
+{
+	if (pulseEmit > 0)
+	{
+		if (PORTD & (1<<PORTD7))
+		{
+			//--pulseEmit; // comment out for debugging purposes
+			PORTD &= ~(1<<PORTD7);
+		}
+		else
+			PORTD |= 1<<PORTD7;
+	}
+}
+
 int main(void)
 {
 	int test = 0;
 	
 	configPWM();
 	pwmOn();
+	ultrasoundEmitterInit();
 	uartInit();
 	sei();
 	
 	while(1) {
-		++test;
+		//++test;
+		pulseEmit = 1;
 	}
 	
 	return 0;
 	
 }
 
-void uartInit(void) {
+
+// ************************************
+// Josh added code here... read the code to see what Josh did
+// ************************************
+
+void ultrasoundEmitterInit(void)
+{
+	// set the direction and the initial value of the PD7 pin
+	DDRD |= 1<<DDD7;
+	PORTD &= ~(1<<PORTD7);
+	
+	// configure a timer (TIMER1) to interrupt continuously @ 40kHz
+	// mode = 4: CTC, trigger ISR @ OCR1A
+	TCCR1A = 0b00000000;
+	TCCR1B = 0b00001000 /*|(1<<CS10)*/;
+	TCCR1C = 0b00000000;
+	OCR1AH = 0b00000000;
+	OCR1AL = 0b11111010; // = 250
+	OCR1BH = 0b11111111;
+	OCR1BL = 0b11111111; // This just so the ISR bit for OCF1B doesn't get flipped.
+	
+	TIMSK1 |= 1<<OCIE1A;
+	TIFR1 = 0b00000000;
+	
+	// If pulseEmit is greater than 0, then ultrasound will be emitted.
+	// Otherwise, the ISR will exit immediately.
+	// Set pulseEmit equal to the number of pulses you want to send over ultrasound;
+	// it will decrease by 1 every time the ISR is called (given it is > 0).
+	pulseEmit = 0;
+	
+	TCCR1B |= 1<<CS10;
+}
+
+// END Josh's code
+
+void uartInit(void)
+{
 	UBRR0H = (unsigned char)(BRR >> 8);
 	UBRR0L = (unsigned char)(BRR);
 	
@@ -165,7 +224,7 @@ void configPWM(void) {
 	DDRD |= 0b01101000;
 	TCCR0B = 0b00000001;
 	TCCR2B = 0b00000001;
-	TIMSK0 = 0b00000110;
-	TIMSK2 = 0b00000110;
-}
+	TIMSK0 = 0b00000000;  // Changed these for you.
+	TIMSK2 = 0b00000000;  // Interrupts aren't used in Fast PWM, so TIMSK's aren't set.
+}						  // This was slowing down runtime substantially.
 
