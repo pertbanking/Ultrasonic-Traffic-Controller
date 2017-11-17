@@ -1,6 +1,6 @@
 Version 3.2 HI-TECH Software Intermediate Code
 [p mainexit ]
-"1376 C:\Program Files (x86)\Microchip\xc8\v1.43\include\pic16f1503.h
+"1376 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic16f1503.h
 [s S76 :2 `uc 1 :1 `uc 1 :4 `uc 1 ]
 [n S76 . SCS . IRCF ]
 "1381
@@ -25,7 +25,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _SPI_init `(v ~T0 @X0 0 ef ]
 "33 pololu_cmd.h
 [v _craftPacket `(v ~T0 @X0 0 ef3`uc`uc`*uc ]
-"1697 C:\Program Files (x86)\Microchip\xc8\v1.43\include\pic16f1503.h
+"1697 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic16f1503.h
 [s S95 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S95 . LATA0 LATA1 LATA2 . LATA4 LATA5 ]
 "1696
@@ -38,10 +38,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 "32 spi.h
 [v _SPI_read_byte `(uc ~T0 @X0 0 ef1`uc ]
 [v F2897 `(v ~T0 @X0 1 tf1`ul ]
-"152 C:\Program Files (x86)\Microchip\xc8\v1.43\include\pic.h
+"153 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic.h
 [v __delay `JF2897 ~T0 @X0 0 e ]
 [p i __delay ]
-"1742 C:\Program Files (x86)\Microchip\xc8\v1.43\include\pic16f1503.h
+"1742 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic16f1503.h
 [s S97 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S97 . LATC0 LATC1 LATC2 LATC3 LATC4 LATC5 ]
 "1741
@@ -95,7 +95,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic16f1503.h: 50: extern volatile unsigned char INDF0 @ 0x000;
-"52 C:\Program Files (x86)\Microchip\xc8\v1.43\include\pic16f1503.h
+"52 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic16f1503.h
 [; ;pic16f1503.h: 52: asm("INDF0 equ 00h");
 [; <" INDF0 equ 00h ;# ">
 [; ;pic16f1503.h: 55: typedef union {
@@ -2887,14 +2887,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic16f1503.h: 8041: extern volatile __bit nT1SYNC @ (((unsigned) &T1CON)*8) + 2;
 [; ;pic16f1503.h: 8043: extern volatile __bit nTO @ (((unsigned) &STATUS)*8) + 4;
 [; ;pic16f1503.h: 8045: extern volatile __bit nWPUEN @ (((unsigned) &OPTION_REG)*8) + 7;
-[; ;pic.h: 28: extern void __nop(void);
-[; ;pic.h: 77: extern unsigned int flash_read(unsigned short addr);
-[; ;pic.h: 152: extern __nonreentrant void _delay(unsigned long);
-[; ;pic.h: 154: extern __nonreentrant void _delaywdt(unsigned long);
-[; ;pic.h: 157: extern __nonreentrant void _delay3(unsigned char);
-[; ;pic.h: 192: extern unsigned char __resetbits;
-[; ;pic.h: 193: extern __bit __powerdown;
-[; ;pic.h: 194: extern __bit __timeout;
+[; ;pic.h: 29: extern void __nop(void);
+[; ;pic.h: 78: extern unsigned int flash_read(unsigned short addr);
+[; ;pic.h: 153: extern __nonreentrant void _delay(unsigned long);
+[; ;pic.h: 155: extern __nonreentrant void _delaywdt(unsigned long);
+[; ;pic.h: 158: extern __nonreentrant void _delay3(unsigned char);
+[; ;pic.h: 193: extern __bank0 unsigned char __resetbits;
+[; ;pic.h: 194: extern __bank0 __bit __powerdown;
+[; ;pic.h: 195: extern __bank0 __bit __timeout;
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 28: typedef signed short long int int24_t;
