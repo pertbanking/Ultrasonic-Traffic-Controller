@@ -33,9 +33,11 @@
 #include "NRF_consts.h"
 
 
+// function prototypes
 void configureTX(void);
 int transmitData(uint8_t *data, uint8_t len);
 void configureReceiver(void);
+
 
 void main(void) {
     configureReceiver();
@@ -64,7 +66,7 @@ void configureTX(void) {
     // 3. A high pulse of CE starts the transmission. Minimum pulse width of
     // 10 microseconds
     // 4. stuff happens
-    // 5. auto acknoledgment happens and TX_DS in the status register is
+    // 5. auto acknoledgement happens and TX_DS in the status register is
     // set high. IRQ will be active when TX_DS or MAX_RT is set high. to turn
     // of IRQ, interrupt source must be reset by writing to SREG
     NRF_CE = 0;
@@ -101,9 +103,9 @@ void configureTX(void) {
 
 int transmitData(uint8_t *data, uint8_t len) {
     uint8_t write[1 + len];
-    write[0]= W_TX_PAYLOAD; //command
+    write[0] = W_TX_PAYLOAD; //command
     for(uint8_t i = 0; i < len; ++i) {
-        write[1+i] = data[i];// data
+        write[1+i] = data[i]; // data
     }
     SPI_writeArray(write, 1 + len);
     uint8_t sreg;
