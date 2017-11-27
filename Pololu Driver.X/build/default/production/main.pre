@@ -2,13 +2,13 @@
 # 1 "main.c"
 
 
-# 10
-#pragma config FOSC = INTOSC
-#pragma config WDTE = OFF
+# 14
+#pragma config FOSC = ECH
+#pragma config WDTE = ON
 #pragma config PWRTE = OFF
 #pragma config MCLRE = ON
 #pragma config CP = OFF
-#pragma config BOREN = OFF
+#pragma config BOREN = ON
 #pragma config CLKOUTEN = OFF
 
 
@@ -18,17 +18,17 @@
 #pragma config LPBOR = OFF
 #pragma config LVP = ON
 
-# 26 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\htc.h"
+# 26 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
 
 extern double __fpnormalize(double);
 
 
-# 13 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\xc8debug.h"
+# 13 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\xc8debug.h"
 #pragma intrinsic(__builtin_software_breakpoint)
 extern void __builtin_software_breakpoint(void);
 
-# 50 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic16f1503.h"
+# 50 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\pic16f1503.h"
 extern volatile unsigned char INDF0 @ 0x000;
 
 asm("INDF0 equ 00h");
@@ -3786,15 +3786,15 @@ extern volatile __bit nTO @ (((unsigned) &STATUS)*8) + 4;
 extern volatile __bit nWPUEN @ (((unsigned) &OPTION_REG)*8) + 7;
 
 
-# 28 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic.h"
+# 27 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\pic.h"
 #pragma intrinsic(__nop)
 extern void __nop(void);
 
-# 78
+# 77
 extern unsigned int flash_read(unsigned short addr);
 
 
-# 152
+# 151
 #pragma intrinsic(_delay)
 extern __nonreentrant void _delay(unsigned long);
 #pragma intrinsic(_delaywdt)
@@ -3803,12 +3803,12 @@ extern __nonreentrant void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __nonreentrant void _delay3(unsigned char);
 
-# 193
-extern __bank0 unsigned char __resetbits;
-extern __bank0 __bit __powerdown;
-extern __bank0 __bit __timeout;
+# 192
+extern unsigned char __resetbits;
+extern __bit __powerdown;
+extern __bit __timeout;
 
-# 13 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\stdint.h"
+# 13 "C:\Program Files (x86)\Microchip\xc8\v1.43\include\stdint.h"
 typedef signed char int8_t;
 
 # 20
@@ -3915,155 +3915,19 @@ uint8_t SPI_writeArray(uint8_t *data, uint8_t length);
 uint8_t SPI_read_byte(uint8_t address);
 void resetIRQ(void);
 
-# 33 "NRF_consts.h"
-const uint8_t RX_ADDR_P[6] = {0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F};
-const uint8_t TX_ADDR = 0x10;
-const uint8_t RX_PW_P[6] = {0x11, 0x12, 0x13, 0x14, 0x15, 0x16};
-
-# 33 "main.c"
-void configureRX(void);
-uint8_t readData(void);
-void configureTX(void);
-int transmitData(uint8_t data);
-
+# 37 "main.c"
 void main(void) {
 
-
-OSCCONbits.IRCF = 0xF;
-TRISAbits.TRISA1 = 0;
-
 initUart();
+configIO();
 SPI_init();
 
-uint8_t packetMove[4];
-craftPacket(5, 5, packetMove);
-
-uint8_t packetStop[4];
-craftPacket(0, 0, packetStop);
-
-LATAbits.LATA1 = 0;
-configureRX();
-
-
-
-
-if(SPI_read_byte(0x00) == 0b00111011) {
-LATAbits.LATA1 = !LATAbits.LATA1;
-_delay((unsigned long)((500)*(16000000UL/4000.0)));
-LATAbits.LATA1 = !LATAbits.LATA1;
-_delay((unsigned long)((500)*(16000000UL/4000.0)));
-}
-
-
+uint8_t packet[4];
 
 while(1) {
-LATCbits.LATC4 = 1;
-while(PORTAbits.RA2);
-LATCbits.LATC4 = 0;
-uint8_t data = readData();
-resetIRQ();
-
-# 80
-if(data == 0xcf) uartWritePacket(packetMove);
-else uartWritePacket(packetStop);
+craftPacket(5, 5, packet);
+uartWritePacket(packet);
 }
 
-# 111
 return;
-}
-
-uint8_t readData(void) {
-LATCbits.LATC3 = 0;
-SPI_write_byte(0b01100001);
-uint8_t ret = SPI_write_byte(0xFF);
-LATCbits.LATC3 = 1;
-return ret;
-}
-
-void configureRX(void) {
-
-# 131
-LATCbits.LATC4 = 0;
-_delay((unsigned long)((1)*(16000000UL/4000.0)));
-LATCbits.LATC3 = 1;
-_delay((unsigned long)((10)*(16000000UL/4000.0)));
-uint8_t write[2];
-write[0] = (0x00 & 0b00011111) | 0b00100000;
-write[1] = 0b00111011;
-SPI_writeArray(write, 2);
-
-
-write[0] = (0x01 & 0b00011111) | 0b00100000;
-write[1] = 0b00000001;
-SPI_writeArray(write, 2);
-
-write[0] = (0x02 & 0b00011111) | 0b00100000;
-write[1] = 0b00000001;
-SPI_writeArray(write, 2);
-
-write[0] = (RX_PW_P[0] & 0b00011111) | 0b00100000;
-write[1] = 0b00000001;
-SPI_writeArray(write, 2);
-
-write[0] = (0x03 & 0b00011111) | 0b00100000;
-write[1] = 0b0000011;
-SPI_writeArray(write, 2);
-
-}
-
-void configureTX(void) {
-
-# 172
-LATCbits.LATC4 = 0;
-_delay((unsigned long)((1)*(16000000UL/4000.0)));
-LATCbits.LATC3 = 1;
-_delay((unsigned long)((10)*(16000000UL/4000.0)));
-uint8_t write[2];
-write[0] = (0x00 & 0b00011111) | 0b00100000;
-write[1] = 0b01001010;
-
-
-SPI_writeArray(write, 2);
-
-
-write[0] = (0x01 & 0b00011111) | 0b00100000;
-write[1] = 0b00000001;
-SPI_writeArray(write, 2);
-
-write[0] = (0x02 & 0b00011111) | 0b00100000;
-write[1] = 0b00000001;
-SPI_writeArray(write, 2);
-
-write[0] = (RX_PW_P[0] & 0b00011111) | 0b00100000;
-write[1] = 0b00000001;
-SPI_writeArray(write, 2);
-
-write[0] = (0x03 & 0b00011111) | 0b00100000;
-write[1] = 0b0000011;
-SPI_writeArray(write, 2);
-
-}
-
-
-
-int transmitData(uint8_t data) {
-uint8_t write[2];
-write[0]= 0b10100000;
-write[1] = data;
-SPI_writeArray(write, 2);
-uint8_t sreg;
-do {
-LATCbits.LATC4 = 1;
-_delay((unsigned long)((15)*(16000000UL/4000000.0)));
-LATCbits.LATC4 = 0;
-while(PORTAbits.RA2);
-LATCbits.LATC3 = 0;
-sreg = SPI_write_byte(0xFF);
-LATCbits.LATC3 = 1;
-resetIRQ();
-} while(!(sreg & 0b00110000));
-
-
-return (sreg & 0b00010000);
-
 }

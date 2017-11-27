@@ -2,5 +2,4 @@
  build/default/production/main.p1:  \
  main.c  \
 spi.h  \
-pololu_cmd.h  \
-NRF_consts.h 
+pololu_cmd.h 

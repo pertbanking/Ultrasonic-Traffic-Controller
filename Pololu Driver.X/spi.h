@@ -16,9 +16,9 @@ extern "C" {
     
 #define SS_PIN LATCbits.LATC3 // this is NRF_CSN
 #define SCK LATCbits.LATC0
-#define SDO LATCbits.LATC2 // mosi
-#define SDI PORTCbits.RC1 // miso
-#define IRQ PORTAbits.RA2 // interrupt request, goes low when valid address
+#define SDO LATCbits.LATC2
+#define SDI PORTCbits.RC1
+#define IRQ PORTAbits.RA5 // interrupt request, goes low when valid address
 #define NRF_CE LATCbits.LATC4 // chip enable activates RX or TX mode
 
     

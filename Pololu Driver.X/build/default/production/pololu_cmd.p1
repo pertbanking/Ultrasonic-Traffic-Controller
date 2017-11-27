@@ -1,26 +1,26 @@
 Version 3.2 HI-TECH Software Intermediate Code
 "31 pololu_cmd.h
 [v _uartWriteByte `(v ~T0 @X0 0 ef1`uc ]
-"1742 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic16f1503.h
-[s S97 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S97 . LATC0 LATC1 LATC2 LATC3 LATC4 LATC5 ]
-"1741
-[u S96 `S97 1 ]
-[n S96 . . ]
-"1751
-[v _LATCbits `VS96 ~T0 @X0 0 e@270 ]
+"1697 C:\Program Files (x86)\Microchip\xc8\v1.43\include\pic16f1503.h
+[s S95 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S95 . LATA0 LATA1 LATA2 . LATA4 LATA5 ]
+"1696
+[u S94 `S95 1 ]
+[n S94 . . ]
+"1706
+[v _LATAbits `VS94 ~T0 @X0 0 e@268 ]
 [v F2925 `(v ~T0 @X0 1 tf1`ul ]
-"153 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic.h
+"152 C:\Program Files (x86)\Microchip\xc8\v1.43\include\pic.h
 [v __delay `JF2925 ~T0 @X0 0 e ]
 [p i __delay ]
-"1015 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic16f1503.h
-[s S60 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S60 . TRISC0 TRISC1 TRISC2 TRISC3 TRISC4 TRISC5 ]
-"1014
-[u S59 `S60 1 ]
-[n S59 . . ]
-"1024
-[v _TRISCbits `VS59 ~T0 @X0 0 e@142 ]
+"965 C:\Program Files (x86)\Microchip\xc8\v1.43\include\pic16f1503.h
+[s S58 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S58 . TRISA0 TRISA1 TRISA2 TRISA3 TRISA4 TRISA5 ]
+"964
+[u S57 `S58 1 ]
+[n S57 . . ]
+"974
+[v _TRISAbits `VS57 ~T0 @X0 0 e@140 ]
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 28: typedef signed short long int int24_t;
@@ -53,7 +53,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic16f1503.h: 50: extern volatile unsigned char INDF0 @ 0x000;
-"52 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic16f1503.h
+"52 C:\Program Files (x86)\Microchip\xc8\v1.43\include\pic16f1503.h
 [; ;pic16f1503.h: 52: asm("INDF0 equ 00h");
 [; <" INDF0 equ 00h ;# ">
 [; ;pic16f1503.h: 55: typedef union {
@@ -2845,14 +2845,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic16f1503.h: 8041: extern volatile __bit nT1SYNC @ (((unsigned) &T1CON)*8) + 2;
 [; ;pic16f1503.h: 8043: extern volatile __bit nTO @ (((unsigned) &STATUS)*8) + 4;
 [; ;pic16f1503.h: 8045: extern volatile __bit nWPUEN @ (((unsigned) &OPTION_REG)*8) + 7;
-[; ;pic.h: 29: extern void __nop(void);
-[; ;pic.h: 78: extern unsigned int flash_read(unsigned short addr);
-[; ;pic.h: 153: extern __nonreentrant void _delay(unsigned long);
-[; ;pic.h: 155: extern __nonreentrant void _delaywdt(unsigned long);
-[; ;pic.h: 158: extern __nonreentrant void _delay3(unsigned char);
-[; ;pic.h: 193: extern __bank0 unsigned char __resetbits;
-[; ;pic.h: 194: extern __bank0 __bit __powerdown;
-[; ;pic.h: 195: extern __bank0 __bit __timeout;
+[; ;pic.h: 28: extern void __nop(void);
+[; ;pic.h: 77: extern unsigned int flash_read(unsigned short addr);
+[; ;pic.h: 152: extern __nonreentrant void _delay(unsigned long);
+[; ;pic.h: 154: extern __nonreentrant void _delaywdt(unsigned long);
+[; ;pic.h: 157: extern __nonreentrant void _delay3(unsigned char);
+[; ;pic.h: 192: extern unsigned char __resetbits;
+[; ;pic.h: 193: extern __bit __powerdown;
+[; ;pic.h: 194: extern __bit __timeout;
 [; ;pololu_cmd.h: 29: void uartWritePacket(uint8_t *packet);
 [; ;pololu_cmd.h: 31: void uartWriteByte(uint8_t dat);
 [; ;pololu_cmd.h: 33: void craftPacket(uint8_t x, uint8_t y, uint8_t *packet);
@@ -2896,9 +2896,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _uartWriteByte ]
 [v _dat `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;pololu_cmd.c: 12: LATCbits.LATC5 = 0;
+[; ;pololu_cmd.c: 12: LATAbits.LATA1 = 0;
 "12
-[e = . . _LATCbits 0 5 -> -> 0 `i `uc ]
+[e = . . _LATAbits 0 1 -> -> 0 `i `uc ]
 [; ;pololu_cmd.c: 13: _delay((unsigned long)(((1000000/9600))*(16000000UL/4000000.0)));
 "13
 [e ( __delay (1 -> * -> / -> 1000000 `l -> -> 9600 `i `l `d / -> -> 16000000 `ul `d .4000000.0 `ul ]
@@ -2915,18 +2915,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 "15
 [e $ ! == & >> -> _dat `i _b -> 1 `i -> 1 `i 349  ]
 {
-[; ;pololu_cmd.c: 16: LATCbits.LATC5 = 1;
+[; ;pololu_cmd.c: 16: LATAbits.LATA1 = 1;
 "16
-[e = . . _LATCbits 0 5 -> -> 1 `i `uc ]
+[e = . . _LATAbits 0 1 -> -> 1 `i `uc ]
 "17
 }
 [; ;pololu_cmd.c: 17: } else {
 [e $U 350  ]
 [e :U 349 ]
 {
-[; ;pololu_cmd.c: 18: LATCbits.LATC5 = 0;
+[; ;pololu_cmd.c: 18: LATAbits.LATA1 = 0;
 "18
-[e = . . _LATCbits 0 5 -> -> 0 `i `uc ]
+[e = . . _LATAbits 0 1 -> -> 0 `i `uc ]
 "19
 }
 [e :U 350 ]
@@ -2943,9 +2943,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "21
 }
 [; ;pololu_cmd.c: 21: }
-[; ;pololu_cmd.c: 22: LATCbits.LATC5 = 1;
+[; ;pololu_cmd.c: 22: LATAbits.LATA1 = 1;
 "22
-[e = . . _LATCbits 0 5 -> -> 1 `i `uc ]
+[e = . . _LATAbits 0 1 -> -> 1 `i `uc ]
 [; ;pololu_cmd.c: 23: _delay((unsigned long)(((1000000/9600))*(16000000UL/4000000.0)));
 "23
 [e ( __delay (1 -> * -> / -> 1000000 `l -> -> 9600 `i `l `d / -> -> 16000000 `ul `d .4000000.0 `ul ]
@@ -2998,12 +2998,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pololu_cmd.c: 35: void initUart(void) {
 [e :U _initUart ]
 [f ]
-[; ;pololu_cmd.c: 36: TRISCbits.TRISC5 = 0;
+[; ;pololu_cmd.c: 36: TRISAbits.TRISA1 = 0;
 "36
-[e = . . _TRISCbits 0 5 -> -> 0 `i `uc ]
-[; ;pololu_cmd.c: 37: LATCbits.LATC5 = 1;
+[e = . . _TRISAbits 0 1 -> -> 0 `i `uc ]
+[; ;pololu_cmd.c: 37: LATAbits.LATA1 = 1;
 "37
-[e = . . _LATCbits 0 5 -> -> 1 `i `uc ]
+[e = . . _LATAbits 0 1 -> -> 1 `i `uc ]
 [; ;pololu_cmd.c: 38: }
 "38
 [e :UE 356 ]
