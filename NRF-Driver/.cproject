@@ -33,8 +33,9 @@
 							<tool id="cdt.managedbuild.tool.gnu.cross.c.linker.241942632" name="Cross GCC Linker" superClass="cdt.managedbuild.tool.gnu.cross.c.linker">
 								<option id="gnu.c.link.option.libs.1602641461" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
 									<listOptionValue builtIn="false" value="soc"/>
+									<listOptionValue builtIn="false" value="pthread"/>
 								</option>
-								<option id="gnu.c.link.option.paths.1950294766" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
+								<option id="gnu.c.link.option.paths.1950294766" name="Library search path (-L)" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
 									<listOptionValue builtIn="false" value="/usr/lib/arm-linux-gnueabihf"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.381741356" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
