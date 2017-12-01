@@ -25,20 +25,20 @@ const uint8_t DATA_SIZE = 3;
 #define READ_MODE 0x01
 #define WRITE_MODE 0x00
 #define NRF_CE 115 // GPIO_30 P11
-#define IRQ 7
+#define IRQ 117
 
 
 void *receiveCb;
 gpio *irq, *nrf_ce;
 int hasCallback = 0;
 
-void printReg(spi* spi_dev, uint8_t addr) {
+uint8_t getReg(spi* spi_dev, uint8_t addr) {
 	uint8_t test[2];
 	test[0] = (addr & REGISTER_MASK) | R_MASK;
 	test[1] = 0xff;
 	uint8_t dat[2];
 	libsoc_spi_rw(spi_dev, test, dat, 2);
-	printf("reg @ %d is %d\n", addr, dat[1]);
+	return dat[1];
 }
 
 void resetIRQ(spi* spi_dev) {
@@ -66,7 +66,7 @@ void receiveData(spi* spi_dev, uint8_t *buf) {
 	for(uint i = 1; i < 1 + PIPE_SIZE; ++i) {
 		write[i] = 0xff; // dummy
 	}
-	libsoc_spi_rw(spi_dev, write, buf, 1 + PIPE_SIZE);;
+	libsoc_spi_rw(spi_dev, write, buf, 1 + PIPE_SIZE);
 }
 
 void initRadio(spi *spi_dev, void *receive_callback) {
@@ -117,7 +117,13 @@ void initRadio(spi *spi_dev, void *receive_callback) {
 	resetIRQ(spi_dev);
 }
 
-int sendData(uint8_t *data, spi* spi_dev) {
+void flushTx(spi* spi_dev) {
+	uint8_t wrt[1];
+	wrt[0] = 0b11100001;
+	libsoc_spi_write(spi_dev, wrt, 1);
+}
+
+int sendData(uint8_t *data, spi* spi_dev, uint8_t len) {
 
 	if(hasCallback)
 	libsoc_gpio_callback_interrupt_cancel(irq);
@@ -128,41 +134,44 @@ int sendData(uint8_t *data, spi* spi_dev) {
 	txMode[0] = (CONFIG & REGISTER_MASK) | W_MASK;
 	txMode[1] = 0b01001010;
 
-	libsoc_spi_write(spi_dev, txMode, 2);
+	while(getReg(spi_dev, 0x00) != 0b01001010) libsoc_spi_write(spi_dev, txMode, 2);
 
-	uint8_t myDat[1 + DATA_SIZE];
+	flushTx(spi_dev);
+
+	uint8_t myDat[1 + len];
 	myDat[0] = W_TX_PAYLOAD;
-	for(uint8_t i = 1; i < 1 + DATA_SIZE; ++i) {
+	for(uint8_t i = 1; i < 1 + len; ++i) {
 		myDat[i] = data[i-1];
 	}
-	libsoc_spi_write(spi_dev, myDat, 1 + DATA_SIZE);
+	libsoc_spi_write(spi_dev, myDat, 1 + len);
 	uint8_t sreg;
 
-	libsoc_gpio_set_level(nrf_ce, LOW);
-
-	usleep(20);
+	usleep(1000);
 
 	//printf("sending\n");
 	//printReg(spi_dev, CONFIG);
-
+	uint8_t maxTries = 0;
 	do {
-
+		++maxTries;
 		libsoc_gpio_set_level(nrf_ce, HIGH); // pulse data
 
 		usleep(15);
 
-		libsoc_gpio_set_level(nrf_ce, LOW);
 
 		while(libsoc_gpio_get_level(irq) == HIGH);
+
+		libsoc_gpio_set_level(nrf_ce, LOW);
 
 		libsoc_spi_rw(spi_dev, &GET_NRF_SREG, &sreg, 1);
 
 		resetIRQ(spi_dev);
 
-	}while(!(sreg & 0b00110000));
+		usleep(15);
+		//libsoc_gpio_set_level(nrf_ce, LOW);
+		// printf("stuck!\n");
+	}while(!(sreg & 0b00110000) && maxTries < 100);
 
 	// printf("sent");
-
 
 	// check to see if IRQ was asserted due to Auto ack
 
