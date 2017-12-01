@@ -115,6 +115,9 @@ int main (void) {
 	err = pthread_create(&auton, &myattr, driveAutonomous, (void *)spi_dev);
 	pthread_attr_destroy(&myattr);
 
+	xy_manual[0] = 55;
+	xy_manual[1] = 55;
+
 	for(uint8_t i = 0; i < 4; ++i) {
 		last_tower_ping[i] = 10; // intialize to no pings received recently
 	}
@@ -138,11 +141,13 @@ void *driveAutonomous(void *p) {
 	last_xy_aut[0] = 0;
 	last_xy_aut[1] = 0;
 
-	autonomous_heading[0] = 1;
+	autonomous_heading[0] = 0;
 	autonomous_heading[1] = 1;
 
-	data[1] = (uint8_t)(15 - autonomous_heading[0]*8);
+	data[1] = (uint8_t)(8 - autonomous_heading[0]*8);
 	data[2] = (uint8_t)(autonomous_heading[1]*8);
+
+	printf("dat 1: %d, dat 2: %d\n", data[1], data[2]);
 
 	pthread_mutex_lock(&radio_lock);
 	while(sendData(data, spi_dev, 3));
@@ -179,23 +184,22 @@ void *driveAutonomous(void *p) {
 					autonomous_heading[1] = rotRightY;
 				}
 			} else {
-				/*
-				if (xy_aut[1] > xy_aut[0]) {
+				if (xy_aut[1] < xy_aut[0]) {
 					autonomous_heading[0] = rotRightX;
 					autonomous_heading[1] = rotRightY;
 				} else {
 					autonomous_heading[0] = rotLeftX;
 					autonomous_heading[1] = rotLeftY;
-				}*/
+				}
 			}
 			data[1] = (uint8_t)(15 - autonomous_heading[0]*8);
 			data[2] = (uint8_t)(autonomous_heading[1]*8);
 
 			printf("new heading: %f, %f\n", autonomous_heading[0], autonomous_heading[1]);
 
-			pthread_mutex_lock(&radio_lock);
-			while(sendData(data, spi_dev, 3));
-			pthread_mutex_unlock(&radio_lock);
+			// pthread_mutex_lock(&radio_lock);
+			sendData(data, spi_dev, 3);
+			// pthread_mutex_unlock(&radio_lock);
 		}
 	}
 }
@@ -240,8 +244,9 @@ void handleData(uint8_t *data) {
 	// do somethign with data
 
 	int time = (data[2] | (data[3] << 8));
-	double distance_cm = time * 0.01580 - 17.14;
+	// double distance_cm = time * 0.01580 - 17.14;
 	double theory = time * 0.01715;
+	double distance_cm = theory * 0.9503 + 22.14;
 	// printf("theory: %f\n", theory);
 	// printf("got %f\n from id %d\n", distance_cm, data[1] - 0xb0);
 
@@ -298,11 +303,11 @@ void *sendPing(void *p) {
 	// long period = 1000000000;
 	for(;;) {
 		// printf("pinging...\n");
-		usleep(50000);
+		usleep(200000);
 		int manualTowers = pingCoords(xy_manual, spi_dev, SEND_PING_MANUAL, last_tower_dist);
-		int autonomousTowers = pingCoords(xy_aut, spi_dev, SEND_PING_AUTONOMOUS, last_tower_dist_aut);
+		// int autonomousTowers = pingCoords(xy_aut, spi_dev, SEND_PING_AUTONOMOUS, last_tower_dist_aut);
 
-		changeDirection = (manualTowers > 0 || autonomousTowers > 0);
+		// changeDirection = (manualTowers > 0 || autonomousTowers > 0);
 	}
 	return (void *)0;
 }
@@ -314,11 +319,13 @@ int pingCoords(double *xy, spi * spi_dev, uint8_t head, double *dist) {
 	myData[2] = 0xff; // dummies
 	uint8_t towerData[1];
 	towerData[0] = SEND_PING_TOWER;
-	pthread_mutex_lock(&radio_lock);
+	// printf("pinging\n");
+	// pthread_mutex_lock(&radio_lock);
+	// printf("in mutex\n");
 	// printf("ping result: %d\n", sendData(myData, spi_dev, 3));
 	sendData(myData, spi_dev, 3);
 	sendData(towerData, spi_dev, 1);
-	pthread_mutex_unlock(&radio_lock);
+	// pthread_mutex_unlock(&radio_lock);
 	// printf("ping sent\n");
 	uint8_t gotResponse = 0;
 	uint8_t sreg;
@@ -334,10 +341,10 @@ int pingCoords(double *xy, spi * spi_dev, uint8_t head, double *dist) {
 			if(sreg & 0b01000000) {
 				// printf("match!\n");
 				uint8_t pipe[PIPE_SIZE + 1];
-				pthread_mutex_lock(&radio_lock);
+				// pthread_mutex_lock(&radio_lock);
 				receiveData(spi_dev, pipe);
 				resetIRQ(spi_dev);
-				pthread_mutex_unlock(&radio_lock);
+				// pthread_mutex_unlock(&radio_lock);
 				handleData(pipe);
 				gotResponse++;
 			}
@@ -357,7 +364,7 @@ int pingCoords(double *xy, spi * spi_dev, uint8_t head, double *dist) {
 	if(recentPings >= 3) {
 		// printf("missing tower %d\n", missingTower +1);
 		getCoords(xy, missingTower, dist);
-		// printf("found robot at %f, %f\n", xy_manual[0], xy_manual[1]);
+		printf("found robot at %f, %f\n", xy_manual[0], xy_manual[1]);
 		// getCoords(xy, missingTower, theory_dist);
 		// printf("theory found robot at %f, %f\n", xy_manual_theory[0], xy_manual_theory[1]);
 	}
@@ -410,9 +417,9 @@ void *getPhone(void *p) {
 			data[1] = x;
 			data[2] = y;
 			printf("x: %d, y: %d\n", x, y);
-			pthread_mutex_lock(&radio_lock);
-			while (sendData(data, spi_dev, 3));
-			pthread_mutex_unlock(&radio_lock);
+			// pthread_mutex_lock(&radio_lock);
+			sendData(data, spi_dev, 3);
+			// pthread_mutex_unlock(&radio_lock);
 			printf("sent!\n");
 		}
 	}
@@ -425,16 +432,17 @@ double getDist(double x1, double y1, double x2, double y2) {
 
 double rotX(int right, double curx, double cury) {
 	if(right) {
-		return curx*0.866 - cury*0.5;
+		return curx * 0.97 - cury * 0.174;
 	} else {
-		return curx*0.866 + cury*0.5;
+		return curx * 0.97 + cury * 0.174;
 	}
 }
 
 double rotY(int right, double curx, double cury) {
+
 	if(right) {
-		return curx * 0.5 + cury * 0.866;
+		return curx*0.174 + cury*0.97;
 	} else {
-		return curx * -0.5 + cury * 0.866;
+		return curx*-0.174 + cury*0.97;
 	}
 }

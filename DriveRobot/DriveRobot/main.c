@@ -7,6 +7,8 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
+
+#define F_CPU 20000000UL
 #include <util/delay.h>
 
 // function prototypes
@@ -20,6 +22,8 @@ void turnRight(uint8_t spd);
 void brake(void);
 void configPWM(void);
 
+void ultrasoundEmitterInit(void);
+
 void uartInit(void);
 
 void steer(uint8_t x, uint8_t y);
@@ -27,13 +31,13 @@ void steer(uint8_t x, uint8_t y);
 #define SPEED 0x30
 
 #define UART_BAUD_RATE      9600
-#define F_CPU 20000000UL
 #define DIVISOR 16
 #define BRR (((F_CPU/DIVISOR) / UART_BAUD_RATE) - 1)
 #define PACKET_LENGTH 4
 
 const uint8_t packet_start = 17;
 const uint8_t packet_end = 16;
+const uint8_t START_PING = 20;
 static volatile uint8_t rx_data[PACKET_LENGTH];
 static volatile uint8_t x;
 static volatile uint8_t y;
@@ -41,49 +45,119 @@ static volatile uint8_t length = 0;
 static volatile uint8_t write = 0;
 unsigned char read[4];
 static volatile uint8_t available = 0;
+static volatile uint8_t pulseEmit;
+static volatile int pulseCount = 0;
+static volatile unsigned char dat = 0;
+
 
 
 ISR(BADISR_vect) {
 	return;
 }
 
+
+ISR(TIMER1_COMPA_vect)
+{
+	if (pulseEmit > 0)
+	{
+		if (PORTD & (1<<PORTD7))
+		{
+			++pulseCount;
+			//--pulseEmit; // comment out for debugging purposes
+			PORTD &= ~(1<<PORTD7);
+		}
+		else
+		PORTD |= 1<<PORTD7;
+	}
+	
+	if(pulseCount >= 200) {
+		// pulsed for 5ms
+		pulseCount = 0;
+		pulseEmit = 0;
+	}
+	
+}
+
 ISR (USART_RX_vect) {
-	unsigned char dat = UDR0;
-	if(dat == packet_start) available = 0;
-	read[available++] = dat;
-	if(available == 4) {
-		if(read[3] == packet_end) {
-			steer(read[1], read[2]);
+	dat = UDR0;
+	/*
+	if(dat == START_PING) {
+		pulseEmit = 1;
+		pulseCount = 0;
+	} else if (dat == packet_start) {
+		available = 1;
+		while(dat != packet_end && available < 4) {
+			while(!(UCSR0A & (1 << RXC0)));
+			dat = UDR0;
+			read[available++] = dat;
+		}
+		if(available == 4 && dat == packet_end) steer(read[1], read[2]);
+	}
+	*/
+	
+	if((dat == packet_start || available) && dat != START_PING) {
+		if(dat == packet_start) available = 0;
+		read[available++] = dat;
+		if(available == 4 && dat == packet_end) {
+			if(read[3] == packet_end) {
+				steer(read[1], read[2]);
+				available = 0;
+			}
 		}
 	}
+	
+	else if(dat == START_PING && !available) {
+		pulseEmit = 1;
+		pulseCount = 0;
+	}
+	
 }
 
 int main(void)
 {
-	// int test = 0;
-	
+	int test = 0;
+	pulseEmit = 0;
 	configPWM();
 	pwmOn();
+	ultrasoundEmitterInit();
 	uartInit();
 	sei();
-	// brake();
+	
 	while(1) {
-		/*
-		if(available >= 4) {
-			if(read[0] == packet_start && read[3] == packet_end) {
-				x = read[1];
-				y = read[2];
-				steer(x, y);
-			} else if(read[0] == packet_start && read[2] == packet_end) {
-				steer(0, 0);
-			}
-			available -=4;
-		}
-		*/
+		test++;
 	}
 	
 	return 0;
 	
+}
+
+
+void ultrasoundEmitterInit(void)
+{
+	// set the direction and the initial value of the PD7 pin
+	DDRD |= 1<<DDD7;
+	PORTD &= ~(1<<PORTD7);
+	
+	// configure a timer (TIMER1) to interrupt continuously @ 40kHz
+	// mode = 4: CTC, trigger ISR @ OCR1A
+	TCCR1A = 0b00000000;
+	TCCR1B = 0b00001000 /*|(1<<CS10)*/;
+	TCCR1C = 0b00000000;
+	OCR1AH = 0b00000000;
+	OCR1AL = 0b11111010; // = 250
+	OCR1BH = 0b11111111;
+	OCR1BL = 0b11111111; // This just so the ISR bit for OCF1B doesn't get flipped.
+	
+	TIMSK1 |= 1<<OCIE1A;
+	TIFR1 = 0b00000000;
+	
+	// If pulseEmit is greater than 0, then ultrasound will be emitted.
+	// Otherwise, the ISR will exit immediately.
+	// Set pulseEmit equal to the number of pulses you want to send over ultrasound;
+	// it will decrease by 1 every time the ISR is called (given it is > 0).
+	pulseEmit = 0;
+	
+	TCCR1B |= 1<<CS10;
 }
 
 void uartInit(void) {

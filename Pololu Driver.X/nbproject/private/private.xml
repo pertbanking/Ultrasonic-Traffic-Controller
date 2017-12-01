@@ -3,11 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Josh/Documents/GitHub/Ultrasonic-Traffic-Controller/Pololu%20Driver.X/spi.c</file>
             <file>file:/C:/Users/Josh/Documents/GitHub/Ultrasonic-Traffic-Controller/Pololu%20Driver.X/main.c</file>
             <file>file:/C:/Users/Josh/Documents/GitHub/Ultrasonic-Traffic-Controller/Pololu%20Driver.X/pololu_cmd.c</file>
             <file>file:/C:/Users/Josh/Documents/GitHub/Ultrasonic-Traffic-Controller/Pololu%20Driver.X/NRF_consts.h</file>
             <file>file:/C:/Users/Josh/Documents/GitHub/Ultrasonic-Traffic-Controller/Pololu%20Driver.X/transducer.c</file>
+=======
+            <file>file:/C:/Users/Liam/Pololu%20Driver.X/main.c</file>
+            <file>file:/C:/Users/Liam/Pololu%20Driver.X/spi.c</file>
+            <file>file:/C:/Users/Liam/Pololu%20Driver.X/NRF_consts.h</file>
+            <file>file:/C:/Users/Liam/Pololu%20Driver.X/pololu_cmd.c</file>
+            <file>file:/C:/Users/Liam/Pololu%20Driver.X/pololu_cmd.h</file>
+            <file>file:/C:/Users/Liam/Pololu%20Driver.X/spi.h</file>
+>>>>>>> fbb3088a4687b1e785117ea827be8ed7fa9dd7d2
         </group>
     </open-files>
 </project-private>

@@ -1,5 +1,5 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"1015 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic16f1503.h
+"1015 C:\Program Files (x86)\Microchip\xc8\v1.43\include\pic16f1503.h
 [s S60 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S60 . TRISC0 TRISC1 TRISC2 TRISC3 TRISC4 TRISC5 ]
 "1014
@@ -84,7 +84,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic16f1503.h: 50: extern volatile unsigned char INDF0 @ 0x000;
-"52 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic16f1503.h
+"52 C:\Program Files (x86)\Microchip\xc8\v1.43\include\pic16f1503.h
 [; ;pic16f1503.h: 52: asm("INDF0 equ 00h");
 [; <" INDF0 equ 00h ;# ">
 [; ;pic16f1503.h: 55: typedef union {
@@ -2876,14 +2876,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic16f1503.h: 8041: extern volatile __bit nT1SYNC @ (((unsigned) &T1CON)*8) + 2;
 [; ;pic16f1503.h: 8043: extern volatile __bit nTO @ (((unsigned) &STATUS)*8) + 4;
 [; ;pic16f1503.h: 8045: extern volatile __bit nWPUEN @ (((unsigned) &OPTION_REG)*8) + 7;
-[; ;pic.h: 29: extern void __nop(void);
-[; ;pic.h: 78: extern unsigned int flash_read(unsigned short addr);
-[; ;pic.h: 153: extern __nonreentrant void _delay(unsigned long);
-[; ;pic.h: 155: extern __nonreentrant void _delaywdt(unsigned long);
-[; ;pic.h: 158: extern __nonreentrant void _delay3(unsigned char);
-[; ;pic.h: 193: extern __bank0 unsigned char __resetbits;
-[; ;pic.h: 194: extern __bank0 __bit __powerdown;
-[; ;pic.h: 195: extern __bank0 __bit __timeout;
+[; ;pic.h: 28: extern void __nop(void);
+[; ;pic.h: 77: extern unsigned int flash_read(unsigned short addr);
+[; ;pic.h: 152: extern __nonreentrant void _delay(unsigned long);
+[; ;pic.h: 154: extern __nonreentrant void _delaywdt(unsigned long);
+[; ;pic.h: 157: extern __nonreentrant void _delay3(unsigned char);
+[; ;pic.h: 192: extern unsigned char __resetbits;
+[; ;pic.h: 193: extern __bit __powerdown;
+[; ;pic.h: 194: extern __bit __timeout;
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 28: typedef signed short long int int24_t;
@@ -2968,15 +2968,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;spi.c: 22: TRISCbits.TRISC1 = 1;
 "22
 [e = . . _TRISCbits 0 1 -> -> 1 `i `uc ]
-[; ;spi.c: 23: TRISAbits.TRISA2 = 1;
+[; ;spi.c: 23: TRISCbits.TRISC4 = 0;
 "23
-[e = . . _TRISAbits 0 2 -> -> 1 `i `uc ]
-[; ;spi.c: 24: TRISCbits.TRISC4 = 0;
-"24
 [e = . . _TRISCbits 0 4 -> -> 0 `i `uc ]
-[; ;spi.c: 26: OPTION_REGbits.nWPUEN = 0;
-"26
+[; ;spi.c: 24: TRISAbits.TRISA2 = 1;
+"24
+[e = . . _TRISAbits 0 2 -> -> 1 `i `uc ]
+[; ;spi.c: 25: OPTION_REGbits.nWPUEN = 0;
+"25
 [e = . . _OPTION_REGbits 0 5 -> -> 0 `i `uc ]
+[; ;spi.c: 26: WPUAbits.WPUA5 = 1;
+"26
+[e = . . _WPUAbits 0 5 -> -> 1 `i `uc ]
 [; ;spi.c: 27: WPUAbits.WPUA2 = 1;
 "27
 [e = . . _WPUAbits 0 2 -> -> 1 `i `uc ]

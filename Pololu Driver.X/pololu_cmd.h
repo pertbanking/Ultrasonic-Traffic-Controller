@@ -17,8 +17,8 @@ extern "C" {
     
 #define _XTAL_FREQ 16000000UL
 #define PACKET_SIZE 4
-#define TX LATCbits.LATC5
-#define BIT_BANG_DIR TRISCbits.TRISC5
+#define TX LATAbits.LATA1
+#define BIT_BANG_DIR TRISAbits.TRISA1
 #define MAX_SPEED 10
 #define PACKET_START 12
 #define PACKET_END 11

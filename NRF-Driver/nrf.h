@@ -136,6 +136,8 @@ int sendData(uint8_t *data, spi* spi_dev, uint8_t len) {
 
 	while(getReg(spi_dev, 0x00) != 0b01001010) libsoc_spi_write(spi_dev, txMode, 2);
 
+	// printf("in config, value: %x\n", getReg(spi_dev, CONFIG));
+
 	flushTx(spi_dev);
 
 	uint8_t myDat[1 + len];
@@ -155,7 +157,7 @@ int sendData(uint8_t *data, spi* spi_dev, uint8_t len) {
 		++maxTries;
 		libsoc_gpio_set_level(nrf_ce, HIGH); // pulse data
 
-		usleep(15);
+		usleep(20);
 
 
 		while(libsoc_gpio_get_level(irq) == HIGH);
